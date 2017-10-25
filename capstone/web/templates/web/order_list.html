@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block title %}<title>Order Management System</title>{% endblock %}
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet" >
+	<!-- Add additional CSS in static file -->
+	{% load static %}
+	<link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+
+<body>
+{% block content %}
+	<h1>Hi {{ object.Res_id.Res_name }}</h1>
+	<div class="table_container">
+		<table class="table table-striped">
+		<tr id="table_head">
+			<th>Order_ID</th>
+			<th>Product</th>
+			<th>Quantity</th>
+			<th>Table_ID</th>
+			<th>Order Time</th>
+		</tr>
+		{% for object in object_list %}
+		<tr>
+			<td>{{ object.Order_id }}</td>
+			<td>{{ object.Product_id }}</td>
+			<td>{{ object.Quantity }}</td>
+			<td>{{ object.Order_id.Table_id }}</td>
+			<td>{{ object.Order_id.Timestamp}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	</div>
+{% endblock %}
+<footer>
+<p class="footer"> &copy 2017 SCU Bluetooth Capstone Team </p>
+</footer>
+</body>
+</html>
+
+     
