@@ -25,7 +25,7 @@ SECRET_KEY = '!%*a4uj$kb24p5xnbz%8$(_^j*lv$*^g%q)mis3bqp)h=57%%z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['54.191.37.235','localhost']
+ALLOWED_HOSTS = ['54.191.37.235','127.0.0.1']
 
 
 # Application definition
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'capstone',
-    'firstapp.apps.myAppNameConfig',
+    'web.apps.WebConfig',
    # 'firstapp',
 ]
 
@@ -82,7 +82,9 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 	'USER':'root',
 	'PASSWORD':'password',
-	'HOST':'localhost',
+	'HOST':'54.191.37.235',
+	#'HOST':'localhost',
+	    
     }
 }
 
@@ -111,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = True
 
