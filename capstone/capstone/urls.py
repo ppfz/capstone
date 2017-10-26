@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 urlpatterns = [
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'),
     url(r'^admin/', admin.site.urls),
 ]
 
@@ -23,6 +24,7 @@ urlpatterns = [
 from django.conf.urls import include
 
 urlpatterns += [
+	
 	url(r'^web/', include('web.urls')),
 ]
 
@@ -37,3 +39,5 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+

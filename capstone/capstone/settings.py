@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'capstone',
+    'django-rest-framework',
     'web.apps.WebConfig',
-   # 'firstapp',
+   # 'rest_framework',
+    'restapi.apps.restapiConfig'
 ]
 
 MIDDLEWARE = [
