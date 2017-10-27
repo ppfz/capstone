@@ -13,18 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from restapi.views import*
 from django.conf.urls import url
 from django.contrib import admin
 urlpatterns = [
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'),
+    #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'),
     url(r'^admin/', admin.site.urls),
+    url(r'^menus/(\w+)',menu_list),
+    url(r'^menu_item/(\w+)',menu_item),
 ]
 
 # Use include() to add URLS from the web application 
 from django.conf.urls import include
 
 urlpatterns += [
-	
+	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 	url(r'^web/', include('web.urls')),
 ]
 
