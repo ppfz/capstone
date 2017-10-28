@@ -6,8 +6,10 @@ from rest_framework import serializers
 
 class MenuItemSerializer(serializers.ModelSerializer):
 	class Meta:
-		model=Menu_Item
-		fields = ('Menu_id','Menu_id_id','Product_id','Product_id_id')
+#		model=Menu_Item
+#		fields = ('Menu_id','Menu_id_id','Product_id','Product_id_id')
+		model=Product
+		fields = ('Product_id','Product_name','Price','Description')
 
 
 
