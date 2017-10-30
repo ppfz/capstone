@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'capstone',
-   # 'django-rest-framework',
     'web.apps.WebConfig',
     'rest_framework',
     'restapi.apps.RestapiConfig',
@@ -85,8 +84,6 @@ DATABASES = {
 	'USER':'root',
 	'PASSWORD':'password',
 	'HOST':'54.191.37.235',
-	#'HOST':'localhost',
-	    
     }
 }
 
