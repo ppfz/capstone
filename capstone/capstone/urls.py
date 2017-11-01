@@ -1,5 +1,6 @@
 """capstone URL Configuration
 
+
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
 Examples:
@@ -17,10 +18,13 @@ from restapi.views import*
 from django.conf.urls import url
 from django.contrib import admin
 urlpatterns = [
-    #url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'),
+    url(r'^menu/',menu_list2),
+    url(r'^order_item/',order_item),	   
     url(r'^admin/', admin.site.urls),
     url(r'^menus/(\w+)',menu_list),
     url(r'^menu_item/(\w+)',menu_item),
+    url(r'^create_order/',new_order),
+    url(r'^resturant/(\w+)',get_res_info),
 ]
 
 # Use include() to add URLS from the web application 
