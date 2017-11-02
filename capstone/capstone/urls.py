@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^menu_item/(\w+)',menu_item),
     url(r'^create_order/',new_order),
     url(r'^resturant/(\w+)',get_res_info),
+    url(r'^pay/',pay),
 ]
 
 # Use include() to add URLS from the web application 

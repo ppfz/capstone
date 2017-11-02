@@ -22,6 +22,20 @@ def menu_list2(request):
 
 
 @api_view(['GET', 'POST'])
+@csrf_exempt
+# Given a order id we update the payment info after a payment in conducted
+def pay(request):
+    if request.method == 'POST':
+        if Payment.objects.filter(Order_id=request.data['Order_id']).exists():
+            return Response("You have paid the order already", status=status.HTTP_200_OK)
+        ser = PaymentSerializer(data=request.data)
+        if ser.is_valid():
+            ser.save()
+            return Response(ser.data, status=status.HTTP_200_OK)
+        return Response(ser.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'POST'])
 @csrf_exempt 
 def order_item(request):
     if request.method == 'POST':
@@ -31,6 +45,8 @@ def order_item(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
 @api_view(['GET', 'POST'])
 @csrf_exempt
 def new_order(request):
@@ -38,10 +54,24 @@ def new_order(request):
         serializer = OrderSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+"""
+def new_order(request):
+    if request.method == 'POST':
+        serializer = OrderSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+		 # create an entry in Payment table
+          #  order_id = serializer.data.get['Order_id']
+            ser = PaymentSerializer(data=serializer.data)
+            if ser.is_valid():
+                ser.save()
+	    return Response(serializer.data, status=status.HTTP_200_OK)
+#            return Response(ser.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+"""
 def get_res_info(request, str):
     if request.method == 'GET':
         info = Restaurant.objects.get(Res_id=str)

@@ -2,6 +2,24 @@ from restapi.models import *
 from web.models import *
 from rest_framework import serializers
 
+"""
+class PaymentSerializer(serializers.Serializer):
+    Order_id = serializers.CharField(max_length=200)
+    Pre_tips = serializers.FloatField(default=0)
+    Tips = serializers.FloatField(max_value=None, min_value=None,default=0)
+    Total = serializers.FloatField(default=0)
+
+    def create(self, validated_data):
+        return Payment.objects.create(**validated_data)
+"""
+
+class PaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Payment
+        fields = ('__all__')
+
+
+
 class MenuItemSerializer(serializers.Serializer):
     '''
         class Meta:
