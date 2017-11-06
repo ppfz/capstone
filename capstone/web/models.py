@@ -1,8 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
-import uuid # Required for unique id
+import uuid # Required for unique restaurant id
 
 class Restaurant(models.Model):
 	"""
@@ -87,15 +88,6 @@ class Order(models.Model):
 	Res_id = models.ForeignKey('Restaurant', on_delete=models.CASCADE)
 	Timestamp = models.DateTimeField(auto_now_add=True)
 	Table_id = models.CharField(max_length=10)
-	Status_CHOICES = (
-		('CK', 'Cooking'),
-		('DV', 'Delivered'),
-	)
-	Status = models.CharField(
-		max_length=2,
-		choices=Status_CHOICES,
-		default='CK',
-	)
 	
 	class Meta:
 		ordering = ["Timestamp"]
@@ -114,7 +106,7 @@ class Order_Item(models.Model):
 	Order_id = models.ForeignKey('Order', on_delete=models.CASCADE)
 	Product_id = models.ForeignKey('Product', on_delete=models.CASCADE)
 	Quantity = models.IntegerField()	
-
+	Status = models.CharField(max_length=10, default='CK')
 	
 class Payment(models.Model):
 	"""
