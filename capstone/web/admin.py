@@ -33,11 +33,11 @@ class ProdAdmin(admin.ModelAdmin):
 	
 @admin.register(Order)	
 class OrderAdmin(admin.ModelAdmin):
-	list_display = ('Order_id','Res_id', 'Table_id', 'Status')	
+	list_display = ('Order_id','Res_id', 'Table_id')	
 
 @admin.register(Order_Item)
 class OrderItemAdmin(admin.ModelAdmin):
-	list_display = ('Order_id', 'Product_id', 'Quantity')	
+	list_display = ('Order_id', 'Product_id', 'Quantity', 'Status')	
 
 @admin.register(Payment)	
 class PaymentAdmin(admin.ModelAdmin):
