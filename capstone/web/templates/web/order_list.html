@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	{% block title %}<title>Order Management System</title>{% endblock %}
+	{% block title %}<title>Order Details</title>{% endblock %}
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet" >
@@ -12,7 +12,7 @@
 
 <body>
 {% block content %}
-	<h1>Hi {{ object.Res_id.Res_name }}</h1>
+
 	<div class="table_container">
 		<table class="table table-striped">
 		<tr id="table_head">
@@ -29,10 +29,16 @@
 			<td>{{ object.Quantity }}</td>
 			<td>{{ object.Order_id.Table_id }}</td>
 			<td>{{ object.Order_id.Timestamp}}</td>
+			<!-- Added status by Xie 11/6 -->
+			<td> <a href="/web/{{ object.pk }}" class="btn btn-sm btn-secondary">confirm</a></td>
 		</tr>
 		{% endfor %}
 		</table>
 	</div>
+	<p></p>
+	<center>
+		<a href="/accounts/logout/" class="btn btn-md btn-secondary">Log Out</a>
+	</center>	
 {% endblock %}
 <footer>
 <p class="footer"> &copy 2017 SCU Bluetooth Capstone Team </p>
