@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^create_order/',new_order),
     url(r'^resturant/(\w+)',get_res_info),
     url(r'^pay/',pay),
+
 ]
 
 # Use include() to add URLS from the web application 
@@ -34,6 +35,7 @@ from django.conf.urls import include
 urlpatterns += [
 	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 	url(r'^web/', include('web.urls')),
+	url(r'^markdownx/', include('markdownx.urls')),
 ]
 
 #Add URL maps to redirect the base URL to our application
