@@ -127,14 +127,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-"""
-STATIC_ROOT = "app-root/repo/wsgi/static"
-STATICFILES_DIRS = (
-    ('assets', 'app-root/repo/wsgi/openshift/static'),
-
-    )
-"""
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/web/order'
+
+
+# markdownX
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+]
