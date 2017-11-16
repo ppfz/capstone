@@ -17,13 +17,13 @@ def menu_list2(request):
         beacon_id = request.data['beacon']
         all_menus = Menu.objects.filter(Res_id_id=Beacon.objects.get(Beacon_id=beacon_id).Res_id)
         now = datetime.datetime.now().hour
-        # return the avaliable menus to client upon the current time
+        # find the avaliable menus upon the current time
         if now < 11:  # morning time
-            menus = all_menus.exclude(Menu_type='DN', Menu_type='LN', )
+            menus = all_menus.exclude(Type='DN', Type='LN', )
         elif now < 16:  # lunch time
-            menus = all_menus.exclude(Menu_type='DN', Menu_type='BK', )
+            menus = all_menus.exclude(Type='DN', Type='BK', )
         else:  # dinner time
-            menus = all_menus.exclude(Menu_type='LN', Menu_type='BK', )
+            menus = all_menus.exclude(Type='LN', Type='BK', )
 
         if menus.exists():
             ser = MenuSerializer(menus, many=True)
