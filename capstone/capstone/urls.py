@@ -18,6 +18,7 @@ from restapi.views import*
 from django.conf.urls import url
 from django.contrib import admin
 urlpatterns = [
+	"""
     url(r'^menu/',menu_list2),
     url(r'^order_item/',order_item),	   
     url(r'^admin/', admin.site.urls),
@@ -26,6 +27,7 @@ urlpatterns = [
     url(r'^create_order/',new_order),
     url(r'^resturant/(\w+)',get_res_info),
     url(r'^pay/',pay),
+    """
 
 ]
 
@@ -38,10 +40,12 @@ urlpatterns += [
 	url(r'^markdownx/', include('markdownx.urls')),
 ]
 
-#Add URL maps to redirect the base URL to our application
+# Add URL maps to redirect the base URL to our application
 from django.views.generic import RedirectView
 urlpatterns += [
 	url(r'^$', RedirectView.as_view(url='/web/', permanent=True)),
+	url(r'^$', RedirectView.as_view(url='/restapi/', permanent=True)),
+	
 ]
 
 # Use static() to add url mapping to serve static files during development (only)
