@@ -1,13 +1,14 @@
 from web.models import *
+from django.http import JsonResponse
 from restapi.serializers import *
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
 import datetime
+#from rest_framework.renderers import JSONRenderer
 
 CONTENT_NOT_FOUND = {'Message': 'Content Not Found'}
-
 
 # Providing a beacon id, return avalibale menus for this resturant.
 @api_view(['GET', 'POST'])
@@ -19,15 +20,15 @@ def menu_list2(request):
         now = datetime.datetime.now().hour
         # find the avaliable menus upon the current time
         if now < 11:  # morning time
-            menus = all_menus.exclude(Type='DN', Type='LN', )
+            menus = all_menus.exclude(Q(Type='DN')|Q(Type='LN'))
         elif now < 16:  # lunch time
-            menus = all_menus.exclude(Type='DN', Type='BK', )
+            menus = all_menus.exclude(Q(Type='DN')|Q(Type='BK'))
         else:  # dinner time
-            menus = all_menus.exclude(Type='LN', Type='BK', )
+            menus = all_menus.exclude(Q(Type='LN')|Q(Type='BK'))
 
         if menus.exists():
             ser = MenuSerializer(menus, many=True)
-            return Response(ser.data, safe=False)
+            return Response(ser.data, status=status.HTTP_200_OK)
         return Response(CONTENT_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
 
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -83,13 +84,15 @@ def new_order(request):
 
 
 # Given the resturant id, get the information of this resturant.
+#@renderer_classes((JSONRenderer,))
+#@api_view(['GET'])
 def get_res_info(request, str):
     if request.method == 'GET':
         info = Restaurant.objects.get(Res_id=str)
 
-        if info.exists():
+        if info:
             ser = ResSerializer(info)
-            return Response(ser.data, safe=False)
+            return JsonResponse(ser.data, safe=False)
         return Response(CONTENT_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
 
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -102,7 +105,7 @@ def menu_item(request, str):
 
         if items.exists():
             ser = MenuItemSerializer(items, many=True)
-            return Response(ser.data, safe=False)
+            return Response(ser.data, status=status.HTTP_200_OK,content_type= 'json')
         return Response(CONTENT_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
 
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -113,5 +116,5 @@ def menu_list(request, str):
     if request.method == 'GET':
         menus = Menu.objects.filter(Res_id_id=str)
         ser = MenuSerializer(menus, many=True)
-        return Response(ser.data, safe=False)
+        return Response(ser.data, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
