@@ -92,7 +92,7 @@ def get_res_info(request, str):
         if info:
             ser = ResSerializer(info)
             return JsonResponse(ser.data, safe=False)
-        return Response(CONTENT_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
+        return JsonResponse(CONTENT_NOT_FOUND, safe=False, status=status.HTTP_404_NOT_FOUND)
 
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
