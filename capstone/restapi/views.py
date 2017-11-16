@@ -6,9 +6,10 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
 import datetime
-#from rest_framework.renderers import JSONRenderer
+
 
 CONTENT_NOT_FOUND = {'Message': 'Content Not Found'}
+
 
 # Providing a beacon id, return avalibale menus for this resturant.
 @api_view(['GET', 'POST'])
@@ -40,7 +41,7 @@ def menu_list2(request):
 def pay(request):
     if request.method == 'POST':
         # prevent the user double pay an order
-        if Payment.objects.filter(Order_id=request.data['Order_id']).exists():
+        if Payment.objects.filter(Order_id=request.data['Order_id']):
             return Response("You have paid the order already", status=status.HTTP_200_OK)
         # post a payment entry in database
         ser = PaymentSerializer(data=request.data)
@@ -84,8 +85,6 @@ def new_order(request):
 
 
 # Given the resturant id, get the information of this resturant.
-#@renderer_classes((JSONRenderer,))
-#@api_view(['GET'])
 def get_res_info(request, str):
     if request.method == 'GET':
         info = Restaurant.objects.get(Res_id=str)
@@ -98,14 +97,14 @@ def get_res_info(request, str):
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-# get the product info for a menu
+# Get the product info for a menu
 def menu_item(request, str):
     if request.method == 'GET':
         items = Product.objects.filter(menu_item__Menu_id=str)
 
-        if items.exists():
+        if items:
             ser = MenuItemSerializer(items, many=True)
-            return Response(ser.data, status=status.HTTP_200_OK,content_type= 'json')
+            return JsonResponse(ser.data, safe=False)
         return Response(CONTENT_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
 
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -116,5 +115,5 @@ def menu_list(request, str):
     if request.method == 'GET':
         menus = Menu.objects.filter(Res_id_id=str)
         ser = MenuSerializer(menus, many=True)
-        return Response(ser.data, status=status.HTTP_200_OK)
+        return JsonResponse(ser.data, safe=False)
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
