@@ -21,22 +21,22 @@ def menu_list2(request):
         now = datetime.datetime.now().hour
         # find the avaliable menus upon the current time
         if now < 11:  # morning time
-            menus = all_menus.exclude(Q(Type='DN')|Q(Type='LN'))
+            menus = all_menus.exclude(Type='DN').exclude(Type='LN')
         elif now < 16:  # lunch time
-            menus = all_menus.exclude(Q(Type='DN')|Q(Type='BK'))
+            menus = all_menus.exclude(Type='DN').exclude(Type='BK')
         else:  # dinner time
-            menus = all_menus.exclude(Q(Type='LN')|Q(Type='BK'))
+            menus = all_menus.exclude(Type='LN').exlude(Type='BK')
 
-        if menus.exists():
+        if menus:
             ser = MenuSerializer(menus, many=True)
             return Response(ser.data, status=status.HTTP_200_OK)
-        return Response(CONTENT_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
+        return JsonResponse(CONTENT_NOT_FOUND, safe=False,status=status.HTTP_404_NOT_FOUND)
 
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
 # Record the payment info providing an order id
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
 @csrf_exempt
 def pay(request):
     if request.method == 'POST':
@@ -55,7 +55,7 @@ def pay(request):
 
 
 # Place an item in the order when a customer adds an item in the shopping cart
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
 @csrf_exempt
 def order_item(request):
     if request.method == 'POST':
@@ -70,7 +70,7 @@ def order_item(request):
 
 
 # Create a new order
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
 @csrf_exempt
 def new_order(request):
     if request.method == 'POST':
@@ -105,8 +105,7 @@ def menu_item(request, str):
         if items:
             ser = MenuItemSerializer(items, many=True)
             return JsonResponse(ser.data, safe=False)
-        return Response(CONTENT_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
-
+        return JsonResponse(CONTENT_NOT_FOUND, safe=False, status=status.HTTP_404_NOT_FOUND) 
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
