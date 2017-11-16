@@ -9,7 +9,7 @@ import datetime
 CONTENT_NOT_FOUND = {'Message': 'Content Not Found'}
 
 
-# Provided a beacon id, return avalibale menus for this resturant.
+# Providing a beacon id, return avalibale menus for this resturant.
 @api_view(['GET', 'POST'])
 @csrf_exempt
 def menu_list2(request):
