@@ -4,8 +4,6 @@ from django.contrib import admin
 
 from .models import Restaurant, Menu, Menu_Item, Product, Order, Order_Item, Payment, Beacon
 
-#admin.site.register(Restaurant)
-
 # Define the admin class
 class ResAdmin(admin.ModelAdmin):
 	list_display = ('Res_name','Style', 'Phone', 'Price_range', 'Business_hours', 'Address', 'Default_tips')
@@ -13,7 +11,7 @@ class ResAdmin(admin.ModelAdmin):
 # Register the admin class with the associated model
 admin.site.register(Restaurant, ResAdmin)
 
-# Register the Admin classes for Menu using the decorator	
+# Register the Admin classes using the decorator and display the contents	
 @admin.register(Menu)	
 class MenuAdmin(admin.ModelAdmin):
 	list_display = ('Menu_id', 'Res_id', 'Type')
