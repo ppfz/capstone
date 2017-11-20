@@ -10,7 +10,8 @@
 	<link href="{% static 'css/styles.css' %}" rel="stylesheet">
 </head>
 
-<body>
+<body> 
+
 {% block content %}
 
 	<div class="table_container">
@@ -21,6 +22,7 @@
 			<th>Quantity</th>
 			<th>Table_ID</th>
 			<th>Order Time</th>
+			<th>Delivery</th>
 		</tr>
 		{% for object in object_list %}
 		<tr>
@@ -28,19 +30,20 @@
 			<td>{{ object.Product_id }}</td>
 			<td>{{ object.Quantity }}</td>
 			<td>{{ object.Order_id.Table_id }}</td>
-			<td>{{ object.Order_id.Timestamp}}</td>
-			<!-- Added status by Xie 11/6 -->
+			<td>{{ object.Order_id.Timestamp }}</td>
 			<td> <a href="/web/{{ object.pk }}" class="btn btn-sm btn-secondary">confirm</a></td>
 		</tr>
 		{% endfor %}
 		</table>
 	</div>
-	<p></p>
+    <p></p>
 	<center>
+		<a href="/web/payment/" class="btn btn-md btn-secondary">Payment Details</a>
+	    &emsp;
 		<a href="/accounts/logout/" class="btn btn-md btn-secondary">Log Out</a>
 	</center>	
-{% endblock %}
 	
+{% endblock %}
 
 {% block pagination %}
 	{% if is_paginated %}
@@ -63,11 +66,9 @@
 		</div>
 	{% endif %}
 {% endblock %}
-	
+
 <footer>
 <p class="footer"> &copy 2017 SCU Bluetooth Capstone Team </p>
 </footer>
 </body>
 </html>
-
-     
