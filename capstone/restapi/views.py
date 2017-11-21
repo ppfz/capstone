@@ -17,18 +17,18 @@ CONTENT_NOT_FOUND = {'Message': 'Content Not Found'}
 def menu_list2(request):
     if request.method == 'POST':
         beacon_id = request.data['beacon']
-        all_menus = Menu.objects.filter(Res_id_id=Beacon.objects.get(Beacon_id=beacon_id).Res_id)
+        menus = Menu.objects.filter(Res_id_id=Beacon.objects.get(Beacon_id=beacon_id).Res_id)
         now = datetime.datetime.now().hour
         # find the avaliable menus upon the current time
         if now < 11:  # morning time
-            menus = all_menus.exclude(Type='DN').exclude(Type='LN')
+            ava_menus = menus.exclude(Type='DN').exclude(Type='LN')
         elif now < 16:  # lunch time
-            menus = all_menus.exclude(Type='DN').exclude(Type='BK')
+            ava_menus = menus.exclude(Type='DN').exclude(Type='BK')
         else:  # dinner time
-            menus = all_menus.exclude(Type='LN').exlude(Type='BK')
+            ava_menus = menus.exclude(Type='LN').exclude(Type='BK')
 
         if menus:
-            ser = MenuSerializer(menus, many=True)
+            ser = MenuSerializer(ava_menus, many=True)
             return Response(ser.data, status=status.HTTP_200_OK)
         return JsonResponse(CONTENT_NOT_FOUND, safe=False,status=status.HTTP_404_NOT_FOUND)
 
