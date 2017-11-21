@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	{% block title %}<title>Order Details</title>{% endblock %}
+	{% block title %}<title>Payment Details</title>{% endblock %}
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet" >
@@ -18,27 +18,25 @@
 		<table class="table table-striped">
 		<tr id="table_head">
 			<th>Order_ID</th>
-			<th>Product</th>
-			<th>Quantity</th>
-			<th>Table_ID</th>
-			<th>Order Time</th>
-			<th>Delivery</th>
+			<th>Pre_Tips</th>
+			<th>Tips</th>
+			<th>Total Payment</th>
+			<th>Timestamp</th>
 		</tr>
 		{% for object in object_list %}
 		<tr>
 			<td>{{ object.Order_id }}</td>
-			<td>{{ object.Product_id }}</td>
-			<td>{{ object.Quantity }}</td>
-			<td>{{ object.Order_id.Table_id }}</td>
-			<td>{{ object.Order_id.Timestamp }}</td>
-			<td> <a href="/web/{{ object.pk }}" class="btn btn-sm btn-secondary">confirm</a></td>
+			<td>{{ object.Pre_tips }}</td>
+			<td>{{ object.Tips }}</td>
+			<td>{{ object.Total}}</td>
+			<td>{{ object.Timestamp }}</td>
 		</tr>
 		{% endfor %}
 		</table>
 	</div>
     <p></p>
 	<center>
-		<a href="/web/payment/" class="btn btn-md btn-secondary">Payment Details</a>
+		<a href="/web/order/" class="btn btn-md btn-secondary">Order Details</a>
 	    &emsp;
 		<a href="/accounts/logout/" class="btn btn-md btn-secondary">Log Out</a>
 	</center>	

@@ -122,7 +122,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-#
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
@@ -132,7 +131,6 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/web/order'
-
 
 # markdownX
 MARKDOWNX_MARKDOWN_EXTENSIONS = [
