@@ -1,7 +1,5 @@
 from django.contrib import admin
 from markdownx.admin import MarkdownxModelAdmin
-from .models import MyModel
+from web.models import *
 
-admin.site.register(MyModel, MarkdownxModelAdmin)
-
-
+admin.site.register(Order, MarkdownxModelAdmin)
