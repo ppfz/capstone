@@ -20,7 +20,8 @@ from django.conf.urls import url
 from django.contrib import admin
 
 urlpatterns = [
-
+	
+   # urls for the REST services: 
     url(r'^menu/',menu_list2),
     url(r'^order_item/',order_item),	   
     url(r'^admin/', admin.site.urls),
