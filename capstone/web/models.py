@@ -34,7 +34,7 @@ class Product(models.Model):
 	"""
 	Product_id = models.CharField(primary_key=True, max_length=200, help_text="Unique ID for Product")
 	Product_name = models.CharField(max_length=200)
-	Price = models.DecimalField(max_digits=10, decimal_places=2)
+	Price = models.DecimalField(max_digits=30, decimal_places=20)
 	Description = models.TextField(max_length=500)
 
 	def __str__(self):
@@ -114,9 +114,9 @@ class Payment(models.Model):
 	"""
 	Order_id = models.ForeignKey('Order', on_delete=models.CASCADE)
 	Timestamp = models.DateTimeField(auto_now_add=True)
-	Pre_tips = models.DecimalField(max_digits=10, decimal_places=2)
-	Tips = models.DecimalField(max_digits=10, decimal_places=2)
-	Total = models.DecimalField(max_digits=10, decimal_places=2)
+	Pre_tips = models.DecimalField(max_digits=30, decimal_places=20)
+	Tips = models.DecimalField(max_digits=30, decimal_places=20)
+	Total = models.DecimalField(max_digits=30, decimal_places=20)
 	
 
 class Beacon(models.Model):
